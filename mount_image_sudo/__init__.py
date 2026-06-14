@@ -80,3 +80,20 @@ def attach_image(image_path: str) -> str:
 def detach_image(device: str):
     """Detach a block device."""
     subprocess.run(['sudo', 'losetup', '-d', device], capture_output=True)
+
+
+def umount_inner(device: str):
+    """Unmount without cleanup or detach. Used by the orchestrator."""
+    r = subprocess.run(['sudo', 'losetup', device],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        return
+    m = _LO_REGEX.search(r.stdout)
+    if m:
+        subprocess.run(['sudo', 'umount', device], capture_output=True)
+        time.sleep(0.3)
+
+
+def detach_inner(device: str):
+    """Detach without unmount or cleanup. Used by the orchestrator."""
+    subprocess.run(['sudo', 'losetup', '-d', device], capture_output=True)
