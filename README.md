@@ -10,6 +10,10 @@ Disk image mounting via sudo losetup + mount (Linux).
 [![CI](https://img.shields.io/github/actions/workflow/status/MBanucu/mount-image-sudo/test.yml?branch=main)](https://github.com/MBanucu/mount-image-sudo/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/MBanucu/mount-image-sudo/branch/main/graph/badge.svg)](https://codecov.io/gh/MBanucu/mount-image-sudo)
 
+[![Downloads total](https://pepy.tech/badge/mount-image-sudo)](https://pepy.tech/project/mount-image-sudo)
+[![Downloads/month](https://pepy.tech/badge/mount-image-sudo/month)](https://pepy.tech/project/mount-image-sudo)
+[![Downloads/week](https://pepy.tech/badge/mount-image-sudo/week)](https://pepy.tech/project/mount-image-sudo)
+
 ## Quick start
 
 ```python
