@@ -21,7 +21,7 @@ def mount_image(image_path: str, fstype: str = 'exfat',
         ['sudo', 'losetup', '-f', '--show', str(image_path)],
         capture_output=True, text=True)
     if r.returncode != 0:
-        raise RuntimeError(f"losetup failed: {r.stderr}")
+        raise RuntimeError(f"losetup failed: {r.stderr.strip()}")
     loop_dev = r.stdout.strip()
 
     mount_point = tempfile.mkdtemp(prefix='mount_image_')
@@ -38,7 +38,7 @@ def mount_image(image_path: str, fstype: str = 'exfat',
     if r.returncode != 0:
         subprocess.run(['sudo', 'losetup', '-d', loop_dev], capture_output=True)
         shutil.rmtree(mount_point, ignore_errors=True)
-        raise RuntimeError(f"mount failed: {r.stderr}")
+        raise RuntimeError(f"mount failed: {r.stderr.strip()}")
 
     return loop_dev, mount_point
 
@@ -73,7 +73,7 @@ def attach_image(image_path: str) -> str:
         ['sudo', 'losetup', '-f', '--show', str(image_path)],
         capture_output=True, text=True)
     if r.returncode != 0:
-        raise RuntimeError(f"losetup failed: {r.stderr}")
+        raise RuntimeError(f"losetup failed: {r.stderr.strip()}")
     return r.stdout.strip()
 
 
